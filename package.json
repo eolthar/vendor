@@ -1,7 +1,7 @@
 {
     "name": "@eolthar/vendor",
     "description": "Installs GitHub dependencies without git by vendoring source tarballs",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "main.js",
     "types": "types.d.ts",
     "author": "Mlad (https://github.com/eolthar)",
