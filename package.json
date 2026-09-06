@@ -1,8 +1,22 @@
 {
     "name": "@eolthar/vendor",
+    "description": "Installs GitHub dependencies without git by vendoring source tarballs",
     "version": "1.0.0",
-    "description": "Installs GitHub dependencies without git by vendoring release tarballs",
     "main": "main.js",
     "types": "types.d.ts",
-    "license": "MIT"
+    "author": "Mlad (https://github.com/eolthar)",
+    "repository": "https://github.com/eolthar/events",
+    "license": "MIT",
+    "keywords": [
+        "vendor",
+        "vendoring",
+        "github",
+        "git",
+        "dependencies",
+        "install",
+        "tarball",
+        "no-git",
+        "hosting",
+        "pterodactyl"
+    ]
 }

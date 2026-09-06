@@ -1,10 +1,11 @@
 # @eolthar/vendor
-Installs GitHub dependencies on hosts where `git` is unavailable.
+Installs GitHub dependencies without git by vendoring source tarballs.
 
 Packages listed in the `vendor` field of `package.json` are streamed as
 tarballs from codeload, unpacked into a local directory and linked through
 `file:` references, so npm resolves them and their registry dependencies
-without ever touching the git protocol.
+without ever touching the git protocol. The `dependencies` block is rewritten
+with those links and stays that way, while the `vendor` field is left alone.
 
 Git specs found in `dependencies` are moved into the `vendor` field on the
 first run. Git specs found inside a vendored package are lifted to the root
@@ -13,8 +14,21 @@ directory per package name, no nested `node_modules`. When two packages ask
 for different refs of the same name, the first one wins and the other is
 reported.
 
+Anything after `#` is passed to codeload as a ref: a branch, a tag, a full or
+short commit hash. Without it the default branch is used. A version range,
+`#semver:^1.2.0`, is refused, since resolving one needs the git protocol.
+
 A package is downloaded only when its directory is missing, so removing the
 directory is the way to refresh it.
+
+## Install
+```
+npm i @eolthar/vendor
+```
+
+## Example
+[EXAMPLE.md](https://github.com/eolthar/vendor/blob/main/EXAMPLE.md) walks through a
+project that starts through `boot.js`: the manifest, the entry point and the output.
 
 ## ensure(options)
 | Option    | Default            | Description                                |

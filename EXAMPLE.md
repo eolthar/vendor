@@ -7,7 +7,7 @@ A project that starts through `boot.js` instead of its own entry point.
 > without its GitHub dependencies.
 
 ```
-my-bot/
+cat/
 ├── package.json
 ├── boot.js
 └── main.js
@@ -19,13 +19,13 @@ GitHub packages go into the `vendor` field. npm ignores that field, so a plain
 
 ```json
 {
-    "name": "my-bot",
+    "name": "cat",
     "version": "1.0.0",
     "dependencies": {
         "@eolthar/vendor": "^1.0.0"
     },
     "vendor": {
-        "@quoriel/db": "quoriel/db",
+        "@eolthar/events": "eolthar/events",
         "envise": "eolthar/envise#dev"
     }
 }
@@ -47,21 +47,28 @@ require("./main.js");
 ```
 
 ## main.js
+The project itself, which knows nothing about vendoring.
+
 ```js
+// Faces the cat blinks through
 const frames = ["(o.o)", "(-.-)", "(o.o)", "(^.^)"];
-
 let count = 0;
-
+// One tick a second
 setInterval(() => {
     count++;
+    // Walks the list and wraps back to the first face
     const face = frames[count % frames.length];
+    // Backslashes are doubled because the string escapes them
     console.log(" /\\_/\\   " + face + "   " + count);
 }, 1000);
 ```
 
 ## Result
+A cold start. On the next one the packages are already in `vendor/`, so
+nothing is downloaded and the cat shows up right away.
+
 ```
-[vendor] 1/2 "@quoriel/db" downloaded "quoriel/db#HEAD" (32 KB)
+[vendor] 1/2 "@eolthar/events" downloaded "eolthar/events#HEAD" (4 KB)
 [vendor] 2/2 "envise" downloaded "eolthar/envise#dev" (756 B)
 [vendor] Installing dependencies with npm!
  /\_/\   (-.-)   1
