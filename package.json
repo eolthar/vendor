@@ -1,0 +1,8 @@
+{
+    "name": "@eolthar/vendor",
+    "version": "1.0.0",
+    "description": "Installs GitHub dependencies without git by vendoring release tarballs",
+    "main": "main.js",
+    "types": "types.d.ts",
+    "license": "MIT"
+}
