@@ -52,12 +52,16 @@ The project itself, which knows nothing about vendoring.
 ```js
 // Faces the cat blinks through
 const frames = ["(o.o)", "(-.-)", "(o.o)", "(^.^)"];
+
 let count = 0;
+
 // One tick a second
 setInterval(() => {
     count++;
+
     // Walks the list and wraps back to the first face
     const face = frames[count % frames.length];
+    
     // Backslashes are doubled because the string escapes them
     console.log(" /\\_/\\   " + face + "   " + count);
 }, 1000);

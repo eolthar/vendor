@@ -27,8 +27,8 @@ npm i @eolthar/vendor
 ```
 
 ## Example
-[EXAMPLE.md](https://github.com/eolthar/vendor/blob/main/EXAMPLE.md) walks through a
-project that starts through `boot.js`: the manifest, the entry point and the output.
+A project that starts through `boot.js`: the manifest, the entry point and the
+output of a real run. [See the full example](https://github.com/eolthar/vendor/blob/main/EXAMPLE.md).
 
 ## ensure(options)
 | Option    | Default            | Description                                |
