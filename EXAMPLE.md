@@ -2,9 +2,9 @@
 A project that starts through `boot.js` instead of its own entry point.
 
 > [!NOTE]
-> Set `boot.js` as the startup file on the server. The host has to run it
-> instead of `main.js`, otherwise nothing is vendored and the project starts
-> without its GitHub dependencies.
+> Set `boot.js` as the startup file. It has to run instead of `main.js`,
+> otherwise nothing is vendored and the project starts without its GitHub
+> dependencies.
 
 ```
 cat/
@@ -15,7 +15,7 @@ cat/
 
 ## package.json
 GitHub packages go into the `vendor` field. npm ignores that field, so a plain
-`npm install` on the host still succeeds.
+`npm install` still succeeds.
 
 ```json
 {
@@ -32,8 +32,8 @@ GitHub packages go into the `vendor` field. npm ignores that field, so a plain
 ```
 
 ## boot.js
-This is the file the server startup command points at. Requiring the entry
-point after `ensure` matters: the vendored packages do not exist until it
+This is the file the startup command points at. Requiring the entry point
+after `ensure` matters, because the vendored packages do not exist until it
 returns.
 
 ```js

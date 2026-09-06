@@ -9,13 +9,13 @@ with those links and stays that way, while the `vendor` field is left alone.
 
 Git specs found in `dependencies` are moved into the `vendor` field on the
 first run. Git specs found inside a vendored package are lifted to the root
-and handled the same way, which keeps the vendor directory flat: one
-directory per package name, no nested `node_modules`. When two packages ask
+and handled the same way, which keeps the vendor directory flat, with one
+directory per package name and no nested `node_modules`. When two packages ask
 for different refs of the same name, the first one wins and the other is
 reported.
 
-Anything after `#` is passed to codeload as a ref: a branch, a tag, a full or
-short commit hash. Without it the default branch is used. A version range,
+Anything after `#` is passed to codeload as a ref, so a branch, a tag, a full
+or a short commit hash all work. Without it the default branch is used. A version range,
 `#semver:^1.2.0`, is refused, since resolving one needs the git protocol.
 
 A package is downloaded only when its directory is missing, so removing the
@@ -27,8 +27,8 @@ npm i @eolthar/vendor
 ```
 
 ## Example
-A project that starts through `boot.js`: the manifest, the entry point and the
-output of a real run. [See the full example](https://github.com/eolthar/vendor/blob/main/EXAMPLE.md).
+A project that starts through `boot.js`, with the manifest, the entry point and
+the output of a real run. [See the full example](https://github.com/eolthar/vendor/blob/main/EXAMPLE.md).
 
 ## ensure(options)
 | Option    | Default            | Description                                |
@@ -42,9 +42,9 @@ output of a real run. [See the full example](https://github.com/eolthar/vendor/b
 
 Returns a map of `name` to `{ spec, path }`.
 
-`dir` has to stay inside the project: Node resolves a linked package through
-its real path, and a directory outside the project would cut the vendored
-packages off from the root `node_modules`.
+`dir` has to stay inside the project, because Node resolves a linked package
+through its real path, and a directory outside the project would cut the
+vendored packages off from the root `node_modules`.
 
 ## Notes
 Downloads are streamed, so memory stays flat regardless of repository size.
