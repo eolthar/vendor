@@ -5,7 +5,7 @@
     "main": "main.js",
     "types": "types.d.ts",
     "author": "Mlad (https://github.com/eolthar)",
-    "repository": "https://github.com/eolthar/events",
+    "repository": "https://github.com/eolthar/vendor",
     "license": "MIT",
     "keywords": [
         "vendor",
