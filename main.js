@@ -1,7 +1,6 @@
 "use strict";
 
 const { existsSync, readFileSync, rmSync, writeFileSync } = require("fs");
-const { tmpdir } = require("os");
 const { dirname, join, resolve, sep } = require("path");
 const { spawnSync } = require("child_process");
 const { parseSpec, isGitSpec, flatten } = require("./lib/spec");
@@ -54,7 +53,7 @@ function warn(conflicts) {
 }
 
 function runWorker(payload) {
-    const out = join(tmpdir(), "vendor-" + process.pid + "-" + Date.now() + ".json");
+    const out = join(payload.vendorDir, ".vendor-" + process.pid + ".json");
     const result = spawnSync(process.execPath, [WORKER, out], {
         input: JSON.stringify(payload),
         stdio: ["pipe", "inherit", "inherit"],
@@ -62,7 +61,7 @@ function runWorker(payload) {
     });
     if (result.status !== 0) throw new Error("[vendor] download failed");
     const data = JSON.parse(readFileSync(out, "utf8"));
-    rmSync(out, { force: true });
+    rmSync(out, { force: true, maxRetries: 5 });
     return data;
 }
 
@@ -104,7 +103,7 @@ function ensure(options = {}) {
     const seen = new Set();
     for (const name of names(map)) {
         const target = join(vendorDir, flatten(name));
-        if (force) rmSync(target, { recursive: true, force: true });
+        if (force) rmSync(target, { recursive: true, force: true, maxRetries: 5 });
         if (!existsSync(target)) {
             if (!seen.has(name)) tasks.push({ name, spec: map[name] });
             seen.add(name);

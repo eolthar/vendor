@@ -1,6 +1,14 @@
 # @eolthar/vendor
 Installs GitHub dependencies without git by vendoring source tarballs.
 
+Installing a GitHub dependency makes npm run `git ls-remote` to turn the ref
+into a commit, so a host without git fails before anything is downloaded.
+Minimal runtime images and managed environments often ship without it, and
+installing it is not always an option. This package removes that step: the
+ref goes to codeload and comes back as a tarball over HTTPS, so nothing
+beyond Node is needed.
+
+## How it works
 Packages listed in the `vendor` field of `package.json` are streamed as
 tarballs from codeload, unpacked into a local directory and linked through
 `file:` references, so npm resolves them and their registry dependencies
