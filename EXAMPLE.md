@@ -36,6 +36,11 @@ This is the file the startup command points at. Requiring the entry point
 after `ensure` matters, because the vendored packages do not exist until it
 returns.
 
+A separate boot file is only how this example is arranged. `ensure()` is a
+normal function and can be called from the entry point itself, as long as
+every `require` of a vendored package comes after the call. Under ESM that is
+not possible, because `import` is resolved before any statement runs.
+
 ```js
 const { ensure } = require("@eolthar/vendor");
 
